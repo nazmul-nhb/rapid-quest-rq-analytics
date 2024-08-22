@@ -1,8 +1,8 @@
 import { Document, Schema, model } from "mongoose";
-import { ICustomer } from "../types/model";
+import { CustomerDocument, ICustomerAddress, IEmailMarketingConsent } from "../types/models";
 
 // Address Schema
-const CustomerAddressSchema = new Schema({
+const CustomerAddressSchema = new Schema<ICustomerAddress>({
 	id: { type: String, required: true },
 	customer_id: { type: String, required: true },
 	first_name: { type: String, required: true },
@@ -23,14 +23,14 @@ const CustomerAddressSchema = new Schema({
 });
 
 // Email Marketing Consent Schema
-const EmailMarketingConsentSchema = new Schema({
+const EmailMarketingConsentSchema = new Schema<IEmailMarketingConsent>({
 	state: { type: String, required: true },
 	opt_in_level: { type: String, required: true },
 	consent_updated_at: { type: Date, default: null },
 });
 
 // Customer Schema
-const CustomerSchema = new Schema({
+const CustomerSchema = new Schema<CustomerDocument>({
 	_id: { type: String, required: true },
 	addresses: { type: [CustomerAddressSchema], required: true },
 	admin_graphql_api_id: { type: String, required: true },
@@ -60,7 +60,7 @@ const CustomerSchema = new Schema({
 	verified_email: { type: Boolean, required: true },
 });
 
-export const ShopifyCustomer = model<ICustomer & Document>(
+export const ShopifyCustomer = model<CustomerDocument>(
 	"ShopifyCustomer",
 	CustomerSchema,
 	"shopifyCustomers"

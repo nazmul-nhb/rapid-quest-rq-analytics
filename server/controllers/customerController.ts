@@ -1,5 +1,5 @@
 import express, { Request, Response } from "express";
-import { ShopifyCustomer } from "../models/CustomerModel";
+import { ShopifyCustomer } from "../models/ShopifyCustomer";
 
 // get all customers
 export const getCustomers = async (req: Request, res: Response) => {
