@@ -4,6 +4,7 @@ import dotenv from "dotenv";
 import { connectDB } from "./configs/db";
 import { ErrorObject } from "./types/interfaces";
 import customerRoutes from "./routes/customers";
+import productRoutes from "./routes/products";
 
 dotenv.config();
 
@@ -27,6 +28,7 @@ const port = process.env.PORT || 4242;
 		});
 
 		app.use("/customers", customerRoutes);
+		app.use("/products", productRoutes);
 
 		// Error handler for 404
 		app.use((req: Request, res: Response, next: NextFunction) => {

@@ -9,7 +9,7 @@ export const getCustomers = async (req: Request, res: Response) => {
 		res.status(200).send(customers);
 	} catch (error) {
 		if (error instanceof Error) {
-			console.error("Error Getting Customers: ", error.message);
+			console.error("Error Fetching Customers: ", error.message);
 			res.status(400).send({
 				success: false,
 				message: error.message,
