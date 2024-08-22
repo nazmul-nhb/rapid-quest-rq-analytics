@@ -1,18 +1,16 @@
-import express, {Application, Request, Response, NextFunction } from "express";
+import express, { Application, Request, Response, NextFunction } from "express";
 import cors from "cors";
 import dotenv from "dotenv";
 import { connectDB } from "./configs/db";
+import { ErrorObject } from "./types/interfaces";
+import customerRoutes from "./routes/customers";
 
 dotenv.config();
 
 const app: Application = express();
 const port = process.env.PORT || 4242;
 
-interface ErrorObject extends Error {
-	status?: number;
-}
-
-// Use IIFE to start the Server
+// ? Use IIFE to start the Server
 (async () => {
 	try {
 		// Connect to DB
@@ -27,6 +25,8 @@ interface ErrorObject extends Error {
 		app.get("/", async (req: Request, res: Response) => {
 			res.send("Server is Running!");
 		});
+
+		app.use("/customers", customerRoutes);
 
 		// Error handler for 404
 		app.use((req: Request, res: Response, next: NextFunction) => {
