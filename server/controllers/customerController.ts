@@ -4,8 +4,8 @@ import { ShopifyCustomer } from "../models/CustomerModel";
 // get all customers
 export const getCustomers = async (req: Request, res: Response) => {
 	try {
-        const customers = await ShopifyCustomer.find().limit(50);
-        console.log(`Fetched ${customers.length} customers`);
+		const customers = await ShopifyCustomer.find().limit(50);
+		console.log(`Fetched ${customers.length} customers`);
 		res.status(200).send(customers);
 	} catch (error) {
 		if (error instanceof Error) {
@@ -24,5 +24,3 @@ export const getCustomers = async (req: Request, res: Response) => {
 		}
 	}
 };
-
-
