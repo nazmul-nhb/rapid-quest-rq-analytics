@@ -1,5 +1,5 @@
 import express, { Router } from "express";
-import { getCustomers, getNewCustomersOverTime } from "../controllers/customerControllers";
+import { getCustomers, getNewCustomersOverTime, getRepeatCustomers } from "../controllers/customerControllers";
 
 const router: Router = express.Router();
 
@@ -8,5 +8,8 @@ router.get("/", getCustomers);
 
 // get shopify customers
 router.get("/new-customers", getNewCustomersOverTime);
+
+// get repeat customers
+router.get("/repeat-customers", getRepeatCustomers);
 
 export default router;
