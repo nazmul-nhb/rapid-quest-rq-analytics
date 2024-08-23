@@ -1,15 +1,15 @@
 import express, { Request, Response } from "express";
-import { ShopifyProduct } from "../models/ShopifyProduct";
+import { ShopifyOrder } from "../models/ShopifyOrder";
 
-// get all products
-export const getProducts = async (req: Request, res: Response) => {
+// get all orders
+export const getOrders = async (req: Request, res: Response) => {
 	try {
-		const products = await ShopifyProduct.find();
-		console.log(`Fetched ${products.length} products`);
-		res.status(200).send(products);
+		const orders = await ShopifyOrder.find();
+
+		return res.status(200).send(orders);
 	} catch (error) {
 		if (error instanceof Error) {
-			console.error("Error Fetching Products: ", error.message);
+			console.error("Error Fetching Orders: ", error.message);
 			res.status(400).send({
 				success: false,
 				message: error.message,
