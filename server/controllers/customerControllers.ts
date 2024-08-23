@@ -2,6 +2,8 @@ import { Request, Response } from "express";
 import { ShopifyCustomer } from "../models/ShopifyCustomer";
 import { ShopifyOrder } from "../models/ShopifyOrder";
 import { PipelineStage } from "mongoose";
+import { getCustomerCities } from "../utils/getCustomerCities";
+import { prepareCityData } from "../utils/prepareCityData";
 
 // get all customers
 export const getCustomers = async (req: Request, res: Response) => {
@@ -209,6 +211,31 @@ export const getRepeatCustomers = async (req: Request, res: Response) => {
 				success: false,
 				message: error.message,
 			});
+		} else {
+			console.error("An Unknown Error Occurred!");
+			res.status(500).send({
+				success: false,
+				message: "Internal Server Error!",
+			});
+		}
+	}
+};
+
+// Get geographical distribution of customers
+export const getCustomerDistribution = async (req: Request, res: Response) => {
+	try {
+		const cities = await getCustomerCities();
+		const cityData = prepareCityData(cities);
+
+		return res.status(200).send({ success: true, data: cityData });
+	} catch (error) {
+		if (error instanceof Error) {
+			console.error("Error Fetching Cities: ", error.message);
+			res.status(400).send({
+				success: false,
+				message: error.message,
+			});
+			console.error(error.message);
 		} else {
 			console.error("An Unknown Error Occurred!");
 			res.status(500).send({
