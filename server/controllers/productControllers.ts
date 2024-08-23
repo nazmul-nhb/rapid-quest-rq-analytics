@@ -7,7 +7,6 @@ export const getProducts = async (req: Request, res: Response) => {
 		const products = await ShopifyProduct.find(
 			{},
 			{
-				_id: 1,
 				title: 1,
 				handle: 1,
 				product_type: 1,
@@ -28,6 +27,7 @@ export const getProducts = async (req: Request, res: Response) => {
 					inventory_item_id: 1,
 				},
 				options: {
+					product_id: 1,
 					id: 1,
 					name: 1,
 					values: 1,
@@ -35,7 +35,13 @@ export const getProducts = async (req: Request, res: Response) => {
 			}
 		);
 
-		return res.status(200).send(products);
+		const totalProducts = await ShopifyProduct.countDocuments();
+
+		return res.status(200).send({
+			success: true,
+			totalProducts,
+			products,
+		});
 	} catch (error) {
 		if (error instanceof Error) {
 			console.error("Error Fetching Products: ", error.message);

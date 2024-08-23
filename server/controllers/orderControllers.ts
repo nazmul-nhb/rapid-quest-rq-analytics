@@ -8,7 +8,6 @@ export const getOrders = async (req: Request, res: Response) => {
 		const orders = await ShopifyOrder.find(
 			{},
 			{
-				_id: 1,
 				email: 1,
 				created_at: 1,
 				updated_at: 1,
@@ -22,6 +21,7 @@ export const getOrders = async (req: Request, res: Response) => {
 					default_address: 1,
 				},
 				line_items: {
+					id: 1,
 					title: 1,
 					quantity: 1,
 					price: 1,
@@ -29,7 +29,13 @@ export const getOrders = async (req: Request, res: Response) => {
 			}
 		).exec();
 
-		return res.status(200).send(orders);
+		const totalOrders = await ShopifyOrder.countDocuments();
+
+		return res.status(200).send({
+			success: true,
+			totalOrders,
+			orders,
+		});
 	} catch (error) {
 		if (error instanceof Error) {
 			console.error("Error Fetching Orders: ", error.message);

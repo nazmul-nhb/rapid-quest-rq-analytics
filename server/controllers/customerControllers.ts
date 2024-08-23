@@ -11,7 +11,6 @@ export const getCustomers = async (req: Request, res: Response) => {
 		const customers = await ShopifyCustomer.find(
 			{},
 			{
-				_id: 1,
 				first_name: 1,
 				last_name: 1,
 				email: 1,
@@ -30,7 +29,13 @@ export const getCustomers = async (req: Request, res: Response) => {
 			}
 		);
 
-		return res.status(200).send(customers);
+		const totalCustomers = await ShopifyCustomer.countDocuments();
+
+		return res.status(200).send({
+			success: true,
+			totalCustomers,
+			customers,
+		});
 	} catch (error) {
 		if (error instanceof Error) {
 			console.error("Error Fetching Customers: ", error.message);
