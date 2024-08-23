@@ -8,7 +8,27 @@ import { prepareCityData } from "../utils/prepareCityData";
 // get all customers
 export const getCustomers = async (req: Request, res: Response) => {
 	try {
-		const customers = await ShopifyCustomer.find();
+		const customers = await ShopifyCustomer.find(
+			{},
+			{
+				_id: 1,
+				first_name: 1,
+				last_name: 1,
+				email: 1,
+				verified_email: 1,
+				created_at: 1,
+				updated_at: 1,
+				state: 1,
+				orders_count: 1,
+				total_spent: 1,
+				default_address: {
+					city: 1,
+					province: 1,
+					country: 1,
+					zip: 1,
+				},
+			}
+		);
 
 		return res.status(200).send(customers);
 	} catch (error) {

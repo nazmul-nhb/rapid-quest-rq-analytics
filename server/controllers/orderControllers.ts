@@ -5,7 +5,29 @@ import { PipelineStage } from "mongoose";
 // get all orders
 export const getOrders = async (req: Request, res: Response) => {
 	try {
-		const orders = await ShopifyOrder.find();
+		const orders = await ShopifyOrder.find(
+			{},
+			{
+				_id: 1,
+				email: 1,
+				created_at: 1,
+				updated_at: 1,
+				total_price: 1,
+				currency: 1,
+				customer: {
+					id: 1,
+					email: 1,
+					first_name: 1,
+					last_name: 1,
+					default_address: 1,
+				},
+				line_items: {
+					title: 1,
+					quantity: 1,
+					price: 1,
+				},
+			}
+		).exec();
 
 		return res.status(200).send(orders);
 	} catch (error) {

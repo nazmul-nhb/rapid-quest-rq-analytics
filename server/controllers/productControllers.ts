@@ -4,7 +4,36 @@ import { ShopifyProduct } from "../models/ShopifyProduct";
 // get all products
 export const getProducts = async (req: Request, res: Response) => {
 	try {
-		const products = await ShopifyProduct.find();
+		const products = await ShopifyProduct.find(
+			{},
+			{
+				_id: 1,
+				title: 1,
+				handle: 1,
+				product_type: 1,
+				vendor: 1,
+				created_at: 1,
+				updated_at: 1,
+				status: 1,
+				tags: 1,
+				variants: {
+					id: 1,
+					title: 1,
+					price: 1,
+					sku: 1,
+					inventory_quantity: 1,
+					requires_shipping: 1,
+					weight: 1,
+					weight_unit: 1,
+					inventory_item_id: 1,
+				},
+				options: {
+					id: 1,
+					name: 1,
+					values: 1,
+				},
+			}
+		);
 
 		return res.status(200).send(products);
 	} catch (error) {
