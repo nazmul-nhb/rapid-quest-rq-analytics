@@ -2,7 +2,7 @@ import { Document, Schema, model } from "mongoose";
 import { CustomerDocument, ICustomerAddress, IEmailMarketingConsent } from "../types/models";
 
 // Address Schema
-const CustomerAddressSchema = new Schema<ICustomerAddress>({
+export const CustomerAddressSchema = new Schema<ICustomerAddress>({
 	id: { type: String, required: true },
 	customer_id: { type: String, required: true },
 	first_name: { type: String, required: true },
@@ -30,7 +30,7 @@ const EmailMarketingConsentSchema = new Schema<IEmailMarketingConsent>({
 });
 
 // Customer Schema
-const CustomerSchema = new Schema<CustomerDocument>({
+export const CustomerSchema = new Schema<CustomerDocument>({
 	_id: { type: String, required: true },
 	addresses: { type: [CustomerAddressSchema], required: true },
 	admin_graphql_api_id: { type: String, required: true },

@@ -124,3 +124,114 @@ export interface IProduct {
 // Product Type for Mongoose Model
 export type ProductDocument = IProduct & Document;
 
+// Types and interfaces for money-related fields
+export interface IMoney {
+	amount: string | number;
+	currency_code: string;
+}
+
+export interface IMoneySet {
+	shop_money: IMoney;
+	presentment_money: IMoney;
+}
+
+// Types for Order Line Items
+export interface ILineItem {
+	id: string;
+	variant_id: string;
+	title: string;
+	quantity: number;
+	sku: string;
+	variant_title: string;
+	vendor: string;
+	fulfillment_service: string;
+	product_id: string;
+	requires_shipping: boolean;
+	taxable: boolean;
+	gift_card: boolean;
+	name: string;
+	variant_inventory_management: string;
+	properties: any[];
+	product_exists: boolean;
+	fulfillable_quantity: number;
+	grams: number;
+	price: number;
+	total_discount: string;
+	fulfillment_status: string | null;
+	price_set: IMoneySet;
+	total_discount_set: IMoneySet;
+	discount_allocations: any[];
+	duties: any[];
+	admin_graphql_api_id: string;
+}
+
+// Main Order Interface
+export interface IOrder {
+	_id: string;
+	email: string;
+	closed_at: string | null;
+	created_at: string;
+	updated_at: string;
+	number: number;
+	note: string | null;
+	token: string;
+	gateway: string;
+	test: boolean;
+	total_price: string;
+	subtotal_price: string;
+	total_weight: number;
+	total_tax: string;
+	taxes_included: boolean;
+	currency: string;
+	financial_status: string;
+	confirmed: boolean;
+	total_discounts: string;
+	buyer_accepts_marketing: boolean;
+	name: string;
+	referring_site: string | null;
+	landing_site: string | null;
+	cancelled_at: string | null;
+	cancel_reason: string | null;
+	reference: string | null;
+	user_id: string | null;
+	location_id: string | null;
+	source_identifier: string | null;
+	source_url: string | null;
+	device_id: string | null;
+	phone: string | null;
+	customer_locale: string;
+	app_id: number;
+	browser_ip: string;
+	landing_site_ref: string | null;
+	order_number: string;
+	discount_applications: any[];
+	discount_codes: any[];
+	note_attributes: any[];
+	payment_gateway_names: string[];
+	processing_method: string;
+	source_name: string;
+	fulfillment_status: string | null;
+	tax_lines: any[];
+	tags: string;
+	contact_email: string | null;
+	order_status_url: string;
+	presentment_currency: string;
+	total_line_items_price_set: IMoneySet;
+	total_discounts_set: IMoneySet;
+	total_shipping_price_set: IMoneySet;
+	subtotal_price_set: IMoneySet;
+	total_price_set: IMoneySet;
+	total_tax_set: IMoneySet;
+	line_items: ILineItem[];
+	shipping_lines: any[];
+	billing_address: ICustomerAddress | null;
+	shipping_address: ICustomerAddress | null;
+	fulfillments: any[];
+	client_details: any;
+	refunds: any[];
+	customer: ICustomer;
+	total_line_items_price: string;
+}
+
+// Order Type for Mongoose Model
+export type OrderDocument = IOrder & Document;
