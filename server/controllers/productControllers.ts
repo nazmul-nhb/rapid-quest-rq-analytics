@@ -1,4 +1,4 @@
-import express, { Request, Response } from "express";
+import { Request, Response } from "express";
 import { ShopifyProduct } from "../models/ShopifyProduct";
 
 // get all products
