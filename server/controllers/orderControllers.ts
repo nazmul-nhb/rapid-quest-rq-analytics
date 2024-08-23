@@ -111,6 +111,7 @@ export const getTotalSalesOverTime = async (req: Request, res: Response) => {
 	}
 };
 
+// Get sales growth rates over time (daily, monthly, quarterly, yearly)
 export const getSalesGrowthRate = async (req: Request, res: Response) => {
 	try {
 		const interval = req.query.interval as string; // Cast query parameter to string
