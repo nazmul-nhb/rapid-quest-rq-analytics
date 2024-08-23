@@ -4,11 +4,13 @@ This API provides access to customer, product, and order data with several analy
 
 ## Base URL
 
--[Base URL](https://rapid-quest-rq-analytics-server.vercel.app)
+- [Base URL](https://rapid-quest-rq-analytics-server.vercel.app)
 
-    All endpoints are prefixed with the following routes:
+All endpoints are prefixed with the following routes:
 
--`/customers` -`/products` -`/orders`
+- `/customers`
+- `/products`
+- `/orders`
 
 ---
 
@@ -27,8 +29,8 @@ This API provides access to customer, product, and order data with several analy
 **Description:** Retrieves customer data for newly acquired customers over a given period.  
 **Query Parameters:**
 
--**`interval`**: Specifies the time interval for grouping results. Options: `daily`, `monthly`, `quarterly`, `yearly`.  
- **Example:** `/customers/new-customers?interval=monthly`
+- **`interval`**: Specifies the time interval for grouping results. Options: `daily`, `monthly`, `quarterly`, `yearly`.  
+  **Example:** `/customers/new-customers?interval=monthly`
 
 ---
 
@@ -38,8 +40,8 @@ This API provides access to customer, product, and order data with several analy
 **Description:** Fetches data of customers who have made more than one purchase.  
 **Query Parameters:**
 
--**`interval`**: Specifies the time interval for grouping results. Options: `daily`, `monthly`, `quarterly`, `yearly`.  
- **Example:** `/customers/repeat-customers?interval=yearly`
+- **`interval`**: Specifies the time interval for grouping results. Options: `daily`, `monthly`, `quarterly`, `yearly`.  
+  **Example:** `/customers/repeat-customers?interval=yearly`
 
 ---
 
@@ -74,8 +76,8 @@ This API provides access to customer, product, and order data with several analy
 **Description:** Retrieves total sales figures over a specific time period.  
 **Query Parameters:**
 
--**`interval`**: Specifies the time interval for grouping results. Options: `daily`, `monthly`, `quarterly`, `yearly`.  
- **Example:** `/orders/sales-over-time?interval=quarterly`
+- **`interval`**: Specifies the time interval for grouping results. Options: `daily`, `monthly`, `quarterly`, `yearly`.  
+  **Example:** `/orders/sales-over-time?interval=quarterly`
 
 ---
 
@@ -85,8 +87,8 @@ This API provides access to customer, product, and order data with several analy
 **Description:** Calculates and returns the growth rate of sales over time.  
 **Query Parameters:**
 
--**`interval`**: Specifies the time interval for grouping results. Options: `daily`, `monthly`, `quarterly`, `yearly`.  
- **Example:** `/orders/sales-growth-rate?interval=daily`
+- **`interval`**: Specifies the time interval for grouping results. Options: `daily`, `monthly`, `quarterly`, `yearly`.  
+  **Example:** `/orders/sales-growth-rate?interval=daily`
 
 ---
 
