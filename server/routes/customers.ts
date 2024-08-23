@@ -3,7 +3,7 @@ import { getCustomerDistribution, getCustomers, getNewCustomersOverTime, getRepe
 
 const router: Router = express.Router();
 
-// get shopify customers
+// get all customers
 router.get("/", getCustomers);
 
 // get shopify customers

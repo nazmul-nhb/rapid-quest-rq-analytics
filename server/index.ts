@@ -27,7 +27,8 @@ const port = process.env.PORT || 4242;
 		app.get("/", async (req: Request, res: Response) => {
 			res.send("Server is Running!");
 		});
-
+		
+		// Actual Routes
 		app.use("/customers", customerRoutes);
 		app.use("/products", productRoutes);
 		app.use("/orders", orderRoutes);
