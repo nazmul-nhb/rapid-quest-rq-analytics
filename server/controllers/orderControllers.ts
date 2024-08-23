@@ -241,7 +241,7 @@ export const getSalesGrowthRate = async (req: Request, res: Response) => {
 		);
 
 		const growthRates = growthRatesResult[0]?.growthRates || [];
-		
+
 		return res.status(200).send({
 			success: true,
 			data: growthRates,
@@ -249,6 +249,70 @@ export const getSalesGrowthRate = async (req: Request, res: Response) => {
 	} catch (error) {
 		if (error instanceof Error) {
 			console.error("Error Fetching Sales Growth Rate: ", error.message);
+			res.status(400).send({
+				success: false,
+				message: error.message,
+			});
+		} else {
+			console.error("An Unknown Error Occurred!");
+			res.status(500).send({
+				success: false,
+				message: "Internal Server Error!",
+			});
+		}
+	}
+};
+
+// Get Customer Lifetime Value by Cohorts
+export const getCustomerLifetimeValue = async (req: Request, res: Response) => {
+	try {
+		const customerLifetimeValue = await ShopifyOrder.aggregate([
+			{
+				$group: {
+					_id: "$customer.id", // Make sure this field path is correct based on your schema
+					firstPurchaseDate: { $min: { $toDate: "$created_at" } },
+					totalSpent: { $sum: { $toDouble: "$total_price" } },
+				},
+			},
+			{
+				$project: {
+					_id: 1,
+					cohort: {
+						$dateToString: {
+							format: "%Y-%m",
+							date: "$firstPurchaseDate",
+						},
+					},
+					totalSpent: 1,
+				},
+			},
+			{
+				$group: {
+					_id: "$cohort",
+					totalCLTV: { $sum: "$totalSpent" },
+					customerCount: { $sum: 1 },
+				},
+			},
+			{
+				$project: {
+					_id: 0,
+					month: "$_id",
+					totalCLTV: 1,
+					customerCount: 1,
+				},
+			},
+			{
+				$sort: { month: 1 },
+			},
+		]);
+
+		return res.status(200).send({
+			success: true,
+			data: customerLifetimeValue,
+		});
+	} catch (error) {
+		if (error instanceof Error) {
+			console.error("Error Fetching CLTV: ", error.message);
 			res.status(400).send({
 				success: false,
 				message: error.message,
