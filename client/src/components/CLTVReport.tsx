@@ -72,7 +72,7 @@ const CLTVReport: React.FC = () => {
 		);
 
 	return (
-		<section className="flex justify-center h-screen">
+		<section className="flex justify-center h-[88vh] w-full">
 			<Line data={chartData} options={options} />
 		</section>
 	);
