@@ -1,5 +1,10 @@
 import express, { Router } from "express";
-import { getCustomerDistribution, getCustomers, getNewCustomersOverTime, getRepeatCustomers } from "../controllers/customerControllers";
+import {
+    getCustomers,
+	getRepeatCustomers,
+	getCustomerDistribution,
+	getNewCustomersOverTime,
+} from "../controllers/customerControllers";
 
 const router: Router = express.Router();
 
@@ -12,7 +17,7 @@ router.get("/new-customers", getNewCustomersOverTime);
 // get repeat customers
 router.get("/repeat-customers", getRepeatCustomers);
 
-// get customer geographical distribution 
+// get customer geographical distribution
 router.get("/city-distribution", getCustomerDistribution);
 
 export default router;

@@ -1,4 +1,4 @@
-import { Document, Schema, model } from "mongoose";
+import { Schema, model } from "mongoose";
 import { CustomerDocument, ICustomerAddress, IEmailMarketingConsent } from "../types/models";
 
 // Address Schema
