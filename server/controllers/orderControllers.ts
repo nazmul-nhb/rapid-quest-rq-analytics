@@ -84,7 +84,7 @@ export const getTotalSalesOverTime = async (req: Request, res: Response) => {
 			});
 		}
 
-		const sales = await ShopifyOrder.aggregate([
+		const totalSales = await ShopifyOrder.aggregate([
 			{
 				$project: {
 					created_at: {
@@ -120,7 +120,7 @@ export const getTotalSalesOverTime = async (req: Request, res: Response) => {
 
 		return res.status(200).send({
 			success: true,
-			data: sales,
+			totalSales,
 		});
 	} catch (error) {
 		if (error instanceof Error) {
@@ -142,7 +142,7 @@ export const getTotalSalesOverTime = async (req: Request, res: Response) => {
 // Get sales growth rates over time (daily, monthly, quarterly, yearly)
 export const getSalesGrowthRate = async (req: Request, res: Response) => {
 	try {
-		const interval = req.query.interval as string; // Cast query parameter to string
+		const interval = req.query.interval as string;
 
 		const groupBy: Record<string, any> = {
 			daily: {
@@ -272,7 +272,7 @@ export const getSalesGrowthRate = async (req: Request, res: Response) => {
 
 		return res.status(200).send({
 			success: true,
-			data: growthRates,
+			growthRates,
 		});
 	} catch (error) {
 		if (error instanceof Error) {
@@ -336,7 +336,7 @@ export const getCustomerLifetimeValue = async (req: Request, res: Response) => {
 
 		return res.status(200).send({
 			success: true,
-			data: customerLifetimeValue,
+			CLTV: customerLifetimeValue,
 		});
 	} catch (error) {
 		if (error instanceof Error) {

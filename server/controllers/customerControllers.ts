@@ -108,10 +108,10 @@ export const getNewCustomersOverTime = async (req: Request, res: Response) => {
 			},
 			{
 				$sort: {
-					"_id.year": 1,
-					"_id.quarter": 1,
-					"_id.month": 1,
-					"_id.day": 1,
+					"time.year": 1,
+					"time.quarter": 1,
+					"time.month": 1,
+					"time.day": 1,
 				},
 			},
 		];
@@ -123,7 +123,7 @@ export const getNewCustomersOverTime = async (req: Request, res: Response) => {
 
 		return res.status(200).send({
 			success: true,
-			data: newCustomersResult,
+			newCustomers: newCustomersResult,
 		});
 	} catch (error) {
 		if (error instanceof Error) {
@@ -180,7 +180,7 @@ export const getRepeatCustomers = async (req: Request, res: Response) => {
 					created_at: {
 						$dateFromString: { dateString: "$created_at" }, // Ensure `created_at` is a Date object
 					},
-					customer_id: "$customer.id", // Adjust if the customer ID is nested
+					customer_id: "$customer.id",
 				},
 			},
 			{
@@ -227,7 +227,7 @@ export const getRepeatCustomers = async (req: Request, res: Response) => {
 
 		return res.status(200).send({
 			success: true,
-			data: repeatCustomersResult,
+			repeatCustomers: repeatCustomersResult,
 		});
 	} catch (error) {
 		if (error instanceof Error) {
@@ -252,7 +252,7 @@ export const getCustomerDistribution = async (req: Request, res: Response) => {
 		const cities = await getCustomerCities();
 		const cityData = prepareCityData(cities);
 
-		return res.status(200).send({ success: true, data: cityData });
+		return res.status(200).send({ success: true, cities: cityData });
 	} catch (error) {
 		if (error instanceof Error) {
 			console.error("Error Fetching Cities: ", error.message);
