@@ -336,7 +336,7 @@ export const getCustomerLifetimeValue = async (req: Request, res: Response) => {
 
 		return res.status(200).send({
 			success: true,
-			CLTV: customerLifetimeValue,
+			CLTVReport: customerLifetimeValue,
 		});
 	} catch (error) {
 		if (error instanceof Error) {
