@@ -1,7 +1,9 @@
+import CLTVReport from "./components/CLTVReport";
+
 const App = () => {
 	return (
-		<main className="flex items-center justify-center my-6 animate-bounce">
-			Hello Rapid Quest!
+		<main className="px-8 mx-auto w-full">
+			<CLTVReport/>
 		</main>
 	);
 };
